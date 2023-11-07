@@ -1,0 +1,5 @@
+package com.example.Availableflightservice.global;
+
+public class CustomizedResponseEntityExceptionHandler {
+
+}

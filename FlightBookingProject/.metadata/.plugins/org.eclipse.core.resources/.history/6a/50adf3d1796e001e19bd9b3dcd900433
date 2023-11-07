@@ -1,0 +1,5 @@
+package com.example.Flightbookingservice.serviceImpl;
+
+public class BookingServiceImpl {
+
+}

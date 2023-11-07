@@ -1,0 +1,86 @@
+package com.example.Availableflightservice.Repository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.Availableflightservice.model.AvailableFlight;
+import com.example.Availableflightservice.repository.AvailableFlightRepo;
+
+@SpringBootTest
+public class FlightRepositoryTest {
+    @Mock
+    private AvailableFlightRepo flightRepository;
+
+    @Test
+    public void testFindAll() {
+        // Mock data
+        AvailableFlight flight1 = new AvailableFlight("12345", "indigo", "chennai", "Hyderabad", 700, 50,"06/11/2023","7:45 AM");
+        AvailableFlight flight2 = new AvailableFlight("67890", "airthai", "india", "Thailand", 900, 40,"06/11/2023","4:35 PM");
+        List<AvailableFlight> flights = new ArrayList<>();
+        flights.add(flight1);
+        flights.add(flight2);
+
+        when(flightRepository.findAll()).thenReturn(flights);
+
+        List<AvailableFlight> result = flightRepository.findAll();
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testFindById() {
+        AvailableFlight flight = new AvailableFlight("12345", "indigo", "chennai", "Hyderabad", 700, 50,"06/11/2023","7:45 AM");
+
+        when(flightRepository.findById("12345")).thenReturn(Optional.of(flight));
+
+        Optional<AvailableFlight> result = flightRepository.findById("12345");
+
+        assertEquals(true, result.isPresent());
+        assertEquals("indigo", result.get().getFlightName());
+    }
+
+    @Test
+    public void testFindByFlightName() {
+        AvailableFlight flight1 = new AvailableFlight("12345", "indigo", "chennai", "Hyderabad", 700, 50,"06/11/2023","7:45 AM");
+        AvailableFlight flight2 = new AvailableFlight("67890", "airthai", "india", "Thailand", 900, 40,"06/11/2023","4:35 PM");
+        List<AvailableFlight> flights = new ArrayList<>();
+        flights.add(flight1);
+        flights.add(flight2);
+
+        when(flightRepository.findByFlightName("airthai")).thenReturn(flights);
+
+        List<AvailableFlight> result = flightRepository.findByFlightName("airthai");
+
+        // Verify the result
+        assertEquals(2,result.size());
+        assertEquals("airthai", result.get(1).getFlightName());
+    }
+    
+    @Test
+    public void testFindByFlightFromAndFlightToAndDate() {
+        // Mock data
+    	 AvailableFlight flight1 = new AvailableFlight("12345", "indigo", "chennai", "Hyderabad", 700, 50,"06/11/2023","7:45 AM");
+         AvailableFlight flight2 = new AvailableFlight("67890", "airthai", "india", "Thailand", 900, 40,"06/11/2023","4:35 PM");
+         List<AvailableFlight> flights = new ArrayList<>();
+         flights.add(flight1);
+         flights.add(flight2);
+
+        when(flightRepository.findByFlightFromAndFlightToAndDate("chennai", "Hyderabad", "06/11/2023")).thenReturn(flights);
+
+        List<AvailableFlight> result = flightRepository.findByFlightFromAndFlightToAndDate("chennai", "Hyderabad", "06/11/2023");
+
+        assertEquals(2, result.size());
+        assertEquals("chennai", result.get(0).getFlightFrom());
+        assertEquals("Hyderabad", result.get(0).getFlightTo());
+        assertEquals("06/11/2023", result.get(0).getDate());
+    }
+
+
+}

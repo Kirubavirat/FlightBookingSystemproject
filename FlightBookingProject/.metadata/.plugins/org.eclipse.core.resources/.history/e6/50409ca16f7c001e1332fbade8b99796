@@ -1,0 +1,5 @@
+package com.example.Availableflightservice.Repository;
+
+public class FlightRepositoryTest {
+
+}

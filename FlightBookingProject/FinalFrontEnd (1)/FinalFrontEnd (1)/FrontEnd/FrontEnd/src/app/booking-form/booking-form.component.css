@@ -1,0 +1,19 @@
+.error-message {
+  color: red;
+  font-style: italic;
+}
+.h1{
+    float: left;
+}
+.bookingForm{
+    width:40%;
+    margin-left: 55%;
+}
+.bg{
+  background-image: url('/assets/flightTicket.jpg');
+  background-repeat: no-repeat;
+  background-size: auto 50%; /* Set the width to auto and height to 100% */
+  background-position: left center;
+
+ 
+}

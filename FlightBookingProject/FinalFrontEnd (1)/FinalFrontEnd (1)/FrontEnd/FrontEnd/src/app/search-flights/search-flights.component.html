@@ -1,0 +1,78 @@
+<!-- <p>trainlocation works!</p> -->
+<app-navbar-admin></app-navbar-admin>
+<div class="container">
+  <form [formGroup]="search" (ngSubmit)="searchFlights()">
+      <div class="row">
+          <!-- Flight From Field -->
+          <div class="col-md-4 mb-3">
+              <label for="flightFrom" class="form-label"><b>Enter Source</b></label>
+              <input type="text" formControlName="flightFrom" id="flightFrom" class="form-control" placeholder="Enter Flight From" />
+              <div *ngIf="search.get('flightFrom')?.invalid && search.get('flightFrom')?.touched" class="error-message">
+                  <span *ngIf="search.get('flightFrom')?.hasError('required')">Flight From is required</span>
+                  <span *ngIf="search.get('flightFrom')?.hasError('minlength')">Flight From should be at least 3 characters</span>
+                  <span *ngIf="search.get('flightFrom')?.hasError('maxlength')">Flight From should not exceed 30 characters</span>
+              </div>
+          </div>
+          <!-- Flight To Field -->
+          <div class="col-md-4 mb-3">
+              <label for="flightTo" class="form-label"><b>Enter Destination</b></label>
+              <input type="text" formControlName="flightTo" id="flightTo" class="form-control" placeholder="Enter Flight To" />
+              <div *ngIf="search.get('flightTo')?.invalid && search.get('flightTo')?.touched" class="error-message">
+                  <span *ngIf="search.get('flightTo')?.hasError('required')">Flight To is required</span>
+                  <span *ngIf="search.get('flightTo')?.hasError('minlength')">Flight To should be at least 3 characters</span>
+                  <span *ngIf="search.get('flightTo')?.hasError('maxlength')">Flight To should not exceed 30 characters</span>
+              </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="date" class="form-label"><b>Enter Date</b></label>
+            <input type="text" formControlName="date" id="date" class="form-control" placeholder="Enter Date (dd/mm/yyyy)" />
+            <div *ngIf="search.get('date')?.invalid && search.get('date')?.touched" class="error-message">
+                <span *ngIf="search.get('date')?.hasError('required')">Date is required</span>
+                
+            </div>
+        </div>
+          <div class="col-md-2 mb-3">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>search</mat-icon> Search Flights
+            </button>
+        </div>
+      </div>
+  </form>
+</div>
+
+<div class="container1">
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th>Flight No</th>
+        <th>Flight Name</th>
+        <th>Flight From</th>
+        <th>Flight To</th>
+        <th>Fare</th>
+        <th>Seats</th>
+        <th>Time</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of datasource">
+        <td>{{ row.flightNo }}</td>
+        <td>{{ row.flightName }}</td>
+        <td>{{ row.flightFrom }}</td>
+        <td>{{ row.flightTo }}</td>
+        <td>{{ row.fare }}</td>
+        <td>{{ row.seats }}</td>
+        <td>{{ row.time }}</td>
+        <td>{{ row.date }}</td>
+        <td>
+          <a [routerLink]="['/booking-form', row.flightNo,row.fare]">Book</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="datasource.length === 0">
+  <p>No flights found for the given search criteria.</p>
+</div>

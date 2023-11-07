@@ -1,0 +1,29 @@
+package com.example.Availableflightservice;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
+
+import com.example.Availableflightservice.model.AvailableFlight;
+import com.example.Availableflightservice.repository.AvailableFlightRepo;
+
+
+
+@SpringBootTest
+class AvailableFlightServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+	
+	
+
+}

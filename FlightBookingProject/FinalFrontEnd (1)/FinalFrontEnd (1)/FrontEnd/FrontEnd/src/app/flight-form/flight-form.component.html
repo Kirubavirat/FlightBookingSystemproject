@@ -1,0 +1,97 @@
+<app-navbar-admin></app-navbar-admin>
+<div class="flight">
+  <h1>Flight Information Form</h1>
+  <div class="addflight">
+    <form [formGroup]="flightForm" (ngSubmit)="submitForm()">
+      <!-- <p class="error-message" >{{addTrainErrorMessage}}</p> -->
+      <!-- Flight Number Field -->
+      <div class="mb-3">
+        <label for="flightNo" class="form-label"><b>Flight Number</b></label>
+        <input type="text" formControlName="flightNo" id="flightNo" class="form-control" placeholder="Enter Flight Number" />
+        <div *ngIf="flightForm.get('flightNo')?.invalid && flightForm.get('flightNo')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('flightNo')?.hasError('required')">Flight Number is required</span>
+          <span *ngIf="flightForm.get('flightNo')?.hasError('pattern')">Flight Number should contain exactly 5 digits</span>
+        </div>
+      </div>
+
+      <!-- Flight Name Field -->
+      <div class="mb-3">
+        <label for="flightName" class="form-label"><b>Flight Name</b></label>
+        <input type="text" formControlName="flightName" id="flightName" class="form-control" placeholder="Enter Flight Name" />
+        <div *ngIf="flightForm.get('flightName')?.invalid && flightForm.get('flightName')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('flightName')?.hasError('required')">Flight Name is required</span>
+          <span *ngIf="flightForm.get('flightName')?.hasError('minlength')">Flight Name should be at least 3 characters</span>
+          <span *ngIf="flightForm.get('flightName')?.hasError('maxlength')">Flight Name should not exceed 50 characters</span>
+        </div>
+      </div>
+
+      <!-- Flight From Field -->
+      <div class="mb-3">
+        <label for="flightFrom" class="form-label"><b>Flight From</b></label>
+        <input type="text" formControlName="flightFrom" id="flightFrom" class="form-control" placeholder="Enter Flight From" />
+        <div *ngIf="flightForm.get('flightFrom')?.invalid && flightForm.get('flightFrom')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('flightFrom')?.hasError('required')">Flight From is required</span>
+          <span *ngIf="flightForm.get('flightFrom')?.hasError('minlength')">Flight From should be at least 3 characters</span>
+          <span *ngIf="flightForm.get('flightFrom')?.hasError('maxlength')">Flight From should not exceed 30 characters</span>
+        </div>
+      </div>
+
+      <!-- Flight To Field -->
+      <div class="mb-3">
+        <label for="flightTo" class="form-label"><b>Flight To</b></label>
+        <input type="text" formControlName="flightTo" id="flightTo" class="form-control" placeholder="Enter Flight To" />
+        <div *ngIf="flightForm.get('flightTo')?.invalid && flightForm.get('flightTo')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('flightTo')?.hasError('required')">Flight To is required</span>
+          <span *ngIf="flightForm.get('flightTo')?.hasError('minlength')">Flight To should be at least 3 characters</span>
+          <span *ngIf="flightForm.get('flightTo')?.hasError('maxlength')">Flight To should not exceed 30 characters</span>
+        </div>
+      </div>
+
+      <!-- Fare Field -->
+      <div class="mb-3">
+        <label for="fare" class="form-label"><b>Fare</b></label>
+        <input type="number" formControlName="fare" id="fare" class="form-control" placeholder="Enter Fare" />
+        <div *ngIf="flightForm.get('fare')?.invalid && flightForm.get('fare')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('fare')?.hasError('required')">Fare is required</span>
+          <span *ngIf="flightForm.get('fare')?.hasError('min')">Fare should be a positive number</span>
+          <span *ngIf="flightForm.get('fare')?.hasError('max')">Fare should not exceed 1000</span>
+        </div>
+      </div>
+
+      <!-- Seats Field -->
+      <div class="mb-3">
+        <label for="seats" class="form-label"><b>Seats</b></label>
+        <input type="number" formControlName="seats" id="seats" class="form-control" placeholder="Enter Seats" />
+        <div *ngIf="flightForm.get('seats')?.invalid && flightForm.get('seats')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('seats')?.hasError('required')">Seats are required</span>
+          <span *ngIf="flightForm.get('seats')?.hasError('min')">Seats should be a positive number</span>
+          <span *ngIf="flightForm.get('seats')?.hasError('max')">Seats should not exceed 50</span>
+        </div>
+      </div>
+
+      <!-- Time (HH:mm) Field -->
+      <div class="mb-3">
+        <label for="time" class="form-label"><b>Time (HH:mm)</b></label>
+        <input type="text" formControlName="time" id="time" class="form-control" placeholder="Enter Time (HH:mm)" />
+        <div *ngIf="flightForm.get('time')?.invalid && flightForm.get('time')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('time')?.hasError('required')">Time is required</span>
+          <span *ngIf="flightForm.get('time')?.hasError('invalidTimeFormat')">Invalid time format (HH:mm)</span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label"><b>Date </b></label>
+        <input type="text" formControlName="date" id="date" class="form-control" placeholder="Enter date (dd/mm/yyyy)" />
+        <div *ngIf="flightForm.get('date')?.invalid && flightForm.get('date')?.touched" class="error-message">
+          <span *ngIf="flightForm.get('date')?.hasError('required')">Date is required</span>
+          <span *ngIf="flightForm.get('date')?.hasError('invalidTimeFormat')">Invalid date format (dd/mm/yyyy)</span>
+        </div>
+      </div>
+
+      <!-- <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update' : 'Submit' }}</button> -->
+      <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-danger" (click)="reload()">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-secondary" routerLink="/flightList">Go Back</button>
+    </form>
+  </div>
+</div>
